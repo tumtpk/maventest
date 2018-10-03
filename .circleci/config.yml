@@ -42,3 +42,5 @@ workflows:
     jobs:
       - build-job
       - deploy-job
+          requires:
+            - build-job
