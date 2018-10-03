@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build-job:
     docker:
       - image: circleci/openjdk:8-jdk
 
@@ -27,10 +27,24 @@ jobs:
         
       # run tests!
       - run: mvn test
-
-    deploy:
-      commands:
-        - sudo apt-get update
-        - sudo apt-get install sshpass
-        - sshpass -p "123456" ssh user@202.183.247.176
-        - ls
+    
+    deploy-job:
+      machine:
+        enabled: true
+      working_directory: ~/wu2018
+      steps:
+        - run:
+            commands:
+              - sudo apt-get update
+              - sudo apt-get install sshpass
+              - sshpass -p "123456" ssh user@202.183.247.176
+              - ls
+  
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-job
+      - deploy-job:
+          requires:
+            - build-job
