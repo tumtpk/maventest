@@ -37,6 +37,8 @@ jobs:
       enabled: true
     working_directory: ~/repo
     steps:
+      - run: sudo apt-get update
+      - run: sudo apt-get install sshpass
       - run: sshpass -p 123456 user@202.183.247.176 "cd C:\Users\Administrator\Desktop\deploy; git clone https://github.com/tumtpk/maventest; mvn tomcat7:deploy"
 workflows:
   version: 2
