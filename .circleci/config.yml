@@ -33,6 +33,8 @@ jobs:
       # run tests!
       - run: mvn test
   deploy-job:
+    machine:
+      enabled: true
     steps:
       - run: sudo apt-get update
       - run: sudo apt-get install sshpass
