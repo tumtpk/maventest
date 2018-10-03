@@ -38,9 +38,9 @@ jobs:
     steps:
       - run: sudo apt-get update
       - run: sudo apt-get install sshpass
-      - commands: 
-          - sshpass -p "123456" ssh user@202.183.247.176
-          - ls
+    commands: 
+      - sshpass -p "123456" ssh user@202.183.247.176
+      - ls
 workflows:
   version: 2
   build-deploy:
