@@ -34,9 +34,21 @@ jobs:
       enabled: true
     working_directory: ~/repo
     steps:
-      - run: sudo apt-get update
-      - run: sudo apt-get install sshpass
-      - run: sshpass -p "123456" ssh -T user@202.183.247.176 'git clone https://github.com/tumtpk/maventest'
+      - add_ssh_keys:
+          fingerprints:
+            - "ff:fc:05:49:d7:67:e0:82:84:9b:33:27:e4:2c:1f:30"
+
+      - run:
+          name: ssh connection
+          command: ssh user@202.183.247.176
+
+      - run:
+          name: password
+          command: 123456
+
+      - run:
+          name: test ls?
+          command: ls -l
 workflows:
   version: 2
   build-deploy:
