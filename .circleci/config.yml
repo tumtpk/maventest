@@ -36,3 +36,9 @@ jobs:
     working_directory: ~/repo
     steps:
       - run: ssh user@202.183.247.176
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-job
+      - deploy-job
