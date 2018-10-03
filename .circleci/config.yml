@@ -28,11 +28,9 @@ jobs:
       # run tests!
       - run: mvn test
 
-    deployment:
-      dev:
-        branch: master
-        commands:
-          - sudo apt-get update
-          - sudo apt-get install sshpass
-          - sshpass -p "123456" ssh user@202.183.247.176
-          - ls
+    deploy:
+      commands:
+        - sudo apt-get update
+        - sudo apt-get install sshpass
+        - sshpass -p "123456" ssh user@202.183.247.176
+        - ls
