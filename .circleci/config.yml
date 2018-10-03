@@ -35,10 +35,9 @@ jobs:
   deploy-job:
     machine:
       enabled: true
-    steps:
-      - run: sudo apt-get update
-      - run: sudo apt-get install sshpass
     commands: 
+      - sudo apt-get update
+      - sudo apt-get install sshpass
       - sshpass -p "123456" ssh user@202.183.247.176
       - ls
 workflows:
