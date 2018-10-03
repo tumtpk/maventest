@@ -13,7 +13,8 @@ jobs:
     
     steps:
       - checkout
-      - run: sudo apt-get update; sudo apt-get install ssh-pass
+      - run: sudo apt-get update
+      - run: sudo apt-get install sshpass
 
       # Download and cache dependencies
       - restore_cache:
