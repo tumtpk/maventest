@@ -41,3 +41,4 @@ workflows:
   build-deploy:
     jobs:
       - build-job
+      - deploy-job
