@@ -30,3 +30,9 @@ jobs:
         
       # run tests!
       - run: mvn test
+  deploy-job:
+    machine:
+      enabled: true
+    working_directory: ~/repo
+    steps:
+      - run: ssh user@202.183.247.176
