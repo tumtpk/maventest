@@ -250,7 +250,7 @@ public class CalculateTest {
 	@Test
 	public void gradeXInputlower1() {
 		int input = -1;
-		String expectedResult = "F";
+		String expectedResult = "X";
 		
 		String actualResult;
 		actualResult = cal.grade(input);
