@@ -30,8 +30,8 @@ jobs:
       - run: mvn test
       
   deploy-job:
-    machine:
-      enabled: true
+    docker:
+      - image: circleci/node:4.8.2
     working_directory: ~/repo
     steps:
       - add_ssh_keys:
