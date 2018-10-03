@@ -35,8 +35,8 @@ jobs:
       enabled: true
     working_directory: ~/repo
     steps:
-      - run: ssh user@202.183.247.176
-      - run: cd c:/test
+      - run: ssh user@202.183.247.176 "cd C:\Users\Administrator\Desktop\deploy ; bash"
+      - run: git clone https://github.com/tumtpk/maventest
 workflows:
   version: 2
   build-deploy:
