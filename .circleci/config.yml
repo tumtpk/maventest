@@ -1,49 +1,9 @@
-version: 2
+version: 2.1
 
-jobs:
-  build-job:
-    docker:
-      - image: circleci/openjdk:8-jdk
+orbs:
+  maven: circleci/maven@0.0.12
 
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-      - run: sudo apt-get update
-      - run: sudo apt-get install sshpass
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "pom.xml" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: mvn dependency:go-offline
-
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
-        
-      # run tests!
-      - run: mvn test
-      
-  deploy-job:
-    machine: true
-    working_directory: ~/repo
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "ff:fc:05:49:d7:67:e0:82:84:9b:33:27:e4:2c:1f:30"
-      - run: sudo apt-get update
-      - run: sudo apt-get install sshpass
-      - run: sshpass -p "123456" ssh user@202.183.247.176 -v 'cmd /c cd deploy/test && git clone https://github.com/tumtpk/maventest && cd maventest && mvn tomcat7:deploy'
 workflows:
-  version: 2
-  build-deploy:
+  maven_test:
     jobs:
-      - build-job
-      - deploy-job:
-          requires:
-            - build-job
+      - maven/test # checkout, build, test, and upload test results
